@@ -1,0 +1,33 @@
+/* theme.css */
+
+/* LIGHT MODE */
+:root {
+  --bg-main: #ffffff;
+  --bg-card: #d0b7f1;
+  --bg-nav: #b388eb;
+  --bg-button: #b388eb;
+  --bg-button-hover: #a06edb;
+  --bg-box: #f7f4fb;
+  --text-main: #2a1b3d;
+  --text-subtle: #44236f;
+  --text-accent: #6434a3;
+  --text-ondark: #ffffff;
+  --border-color: #dee2e6;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* DARK MODE */
+body.dark {
+  --bg-main: #181322; /* deep lavender-black */
+  --bg-card: #241b34; /* slightly lighter panel color */
+  --bg-nav: #3a2953; /* soft muted violet */
+  --bg-box: #2c2241; /* input and box surfaces */
+  --bg-button: #7b5cbf; /* lavender purple accent */
+  --bg-button-hover: #9b7ce6; /* brighter hover */
+  --text-main: #e8dcfa; /* off-white text with purple undertone */
+  --text-subtle: #bba8d9; /* muted lavender-gray */
+  --text-accent: #caa3ff; /* soft accent purple */
+  --text-ondark: #ffffff;
+  --border-color: #3f2e57; /* soft purple borders */
+  --shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}

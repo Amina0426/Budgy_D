@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Signup | Budgy</title>
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/theme.css' %}" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h2>Create Account</h2>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="username"
+          placeholder="Choose username"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Choose password"
+          required
+        />
+        <button type="submit">Sign up</button>
+      </form>
+
+      <p style="margin-top: 1rem; font-size: 1.5rem">
+        Already have an account? <a href="{% url 'login' %}">Login</a>
+      </p>
+    </div>
+  </body>
+</html>

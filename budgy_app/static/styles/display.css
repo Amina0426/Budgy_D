@@ -1,0 +1,44 @@
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 90%;
+  padding: 0 10px;
+}
+
+/* Cards */
+.summary-card {
+  background-color: var(--bg-box);
+  color: var(--text-main);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 1.3rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Progress Bar */
+.progress-bar-wrapper {
+  width: 100%;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+  background-color: #4caf50; /* green default */
+}
+
+.muted {
+  color: #888;
+  font-style: italic;
+}

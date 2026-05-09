@@ -1,0 +1,404 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#b388eb" />
+    <meta name="description" content="An expense tracker" />
+    <title>Budgy.</title>
+
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/past.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/display.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/in&exp.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/edit.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/settings.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/exform.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/theme.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/responsive.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Quicksand&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+    <link
+      rel="icon"
+      href="{% static 'icons/favicon.ico' %}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="nav one">
+        <button id="set">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <p>Budgy</p>
+      </div>
+      <div class="nav">
+        <a href="#h">Home</a>
+        <a href="#i">Income</a>
+        <a href="#e">Expense</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="home" id="h">
+        <div class="add-expense-wrapper">
+          <button class="add subtle-btn">
+            <span>Add Your Spend</span>
+          </button>
+        </div>
+        <div id="overlay1">
+          <div class="exForm">
+            <div class="close">
+              <span class="close">&#10006;</span>
+            </div>
+            <div class="amt">
+              <p>Add Your Expense :</p>
+              <input type="number" id="in" autofocus />
+            </div>
+            <div class="tags">
+              <p>Choose a Tag :</p>
+              <div class="tag">
+                <button class="tagel">Food</button>
+                <button class="tagel">Travel</button>
+                <button class="tagel" id="tag2">+</button>
+                <input
+                  type="text"
+                  id="tagInput"
+                  placeholder="Enter custom tag"
+                />
+              </div>
+            </div>
+            <button id="add">Add</button>
+          </div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-card">
+            💰 Income: ₹<span id="incomeTotal">0</span>
+          </div>
+          <div class="summary-card">
+            🛒 Expense: ₹<span id="expenseTotal">0</span>
+          </div>
+          <div class="summary-card">
+            💼 Balance: ₹<span id="balanceTotal">0</span>
+          </div>
+          <div class="summary-card">
+            📊 Budget Used: <span id="budgetUsed">0%</span>
+            <div class="progress-bar-wrapper">
+              <div id="budgetProgress" class="progress-bar"></div>
+            </div>
+          </div>
+          <div class="summary-card">
+            💼 Remaining Budget: ₹<span id="budgetRemaining">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="income" id="i">
+        <div class="amt" id="inAmt">
+          <p>Add Amount :</p>
+          <input type="number" id="income" />
+          <button id="inBtn">Add</button>
+        </div>
+        <div class="historylist">
+          <p style="height: 10%">INCOME HISTORY</p>
+          <div class="incList"></div>
+        </div>
+      </div>
+      <div class="expenses" id="e">
+        <div class="curr-page">
+          <div class="curr-header">
+            <span>Current Expenses</span>
+            <div class="filter-container">
+              <button class="filter-btn" id="filter-toggle">Filter</button>
+              <div class="filter-dropdown" id="filter-dropdown">
+                <button data-tag="all">All</button>
+                <button data-tag="food">Food</button>
+                <button data-tag="travel">Travel</button>
+                <button data-tag="bills">Bills</button>
+                <button data-tag="other">Other</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="curr" id="curr-list">
+            <!-- dynamically added expense cards go here -->
+          </div>
+        </div>
+
+        <div id="past-section">
+          <div class="p-header" onclick="togglePast()">
+            <span>Past Totals</span>
+            <svg
+              id="arrow"
+              class="arrow-caret"
+              width="2rem"
+              height="2rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M7 10l5 5 5-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="past"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- image -->
+    <div
+      id="fullImageView"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        overflow: hidden;
+      "
+    >
+      <!-- image counter -->
+      <div
+        id="imgCounter"
+        style="
+          position: absolute;
+          top: 15px;
+          left: 15px;
+          z-index: 10002;
+
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+
+          padding: 6px 12px;
+
+          border-radius: 20px;
+
+          font-size: 14px;
+          font-weight: bold;
+        "
+      >
+        1/1
+      </div>
+
+      <!-- delete button -->
+      <button
+        id="delImg"
+        style="
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          z-index: 10002;
+
+          height: 3rem;
+          width: 3rem;
+
+          font-size: 2rem;
+
+          background-color: #f44336;
+
+          border: none;
+          border-radius: 50%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        "
+        onclick="delImg()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6l-1 14H6L5 6"></path>
+          <path d="M10 11v6"></path>
+          <path d="M14 11v6"></path>
+          <path d="M9 6V4h6v2"></path>
+        </svg>
+      </button>
+
+      <!-- prev button -->
+      <button
+        id="prevImgBtn"
+        style="
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+
+          z-index: 10002;
+
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+
+          border: none;
+
+          width: 45px;
+          height: 45px;
+
+          border-radius: 50%;
+
+          font-size: 28px;
+          cursor: pointer;
+        "
+      >
+        ‹
+      </button>
+
+      <!-- next button -->
+      <button
+        id="nextImgBtn"
+        style="
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+
+          z-index: 10002;
+
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+
+          border: none;
+
+          width: 45px;
+          height: 45px;
+
+          border-radius: 50%;
+
+          font-size: 28px;
+          cursor: pointer;
+        "
+      >
+        ›
+      </button>
+
+      <!-- full image -->
+      <img
+        id="fullImg"
+        src=""
+        style="max-width: 100%; max-height: 100%; object-fit: contain"
+      />
+    </div>
+
+    <!--settings-->
+    <div id="set-modal" class="settings-overlay">
+      <div class="settings-panel">
+        <header class="settings-header">
+          <span class="username">{{ user.username }}</span>
+          <h1>Settings</h1>
+
+          <button class="close-btn" onclick="closeModal()">&#10006;</button>
+        </header>
+
+        <main class="settings-main">
+          <!-- Appearance -->
+          <section class="settings-section">
+            <h2>Appearance</h2>
+            <label class="toggle">
+              <input type="checkbox" id="mode" onchange="toggleMode()" />
+              <span class="slider"></span>
+              <span class="label-text">Dark Mode</span>
+            </label>
+          </section>
+
+          <!-- Budget -->
+          <section class="settings-section">
+            <h2>Budget</h2>
+            <div class="input-group">
+              <label for="monthlyBudget">Monthly Limit (₹)</label>
+              <input
+                type="number"
+                id="monthlyBudget"
+                placeholder="e.g. 5000"
+                class="input"
+              />
+            </div>
+          </section>
+
+          <!-- Data -->
+          <section class="settings-section">
+            <h2>Data</h2>
+            <button onclick="downloadData()">📦 Export Data</button>
+            <button onclick="resetApp()">🗑 Reset App</button>
+          </section>
+
+          <!-- Logout -->
+          <section class="settings-section">
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary logout">
+                Logout
+              </button>
+            </form>
+          </section>
+
+          <!-- About -->
+          <section class="settings-section about">
+            <p>Version 5.0.2</p>
+            <p>Made by Amina</p>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!--edit-->
+    <div id="editModalOverlay">
+      <div id="editModalBox">
+        <h2>Edit Entry</h2>
+        <input type="number" id="editAmountInput" placeholder="Amount" />
+        <input type="text" id="editTagInput" placeholder="Tag" />
+        <div class="prompt-buttons">
+          <button id="editSaveBtn">Save</button>
+          <button id="editCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/static/service-worker.js")
+          .then((reg) => console.log("SW registered", reg.scope))
+          .catch((err) => console.log("SW registration failed", err));
+      }
+    </script>
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+  </body>
+</html>

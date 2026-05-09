@@ -1,0 +1,389 @@
+@media screen and (max-width: 400px) {
+  /*mobile */
+  .nav {
+    font-size: 0.8rem;
+  }
+  .home,
+  .expenses,
+  .income {
+    font-size: 1.5rem;
+  }
+  .home .display {
+    height: 70%;
+  }
+  .summary-card {
+    font-size: 0.8rem;
+  }
+  .amt input,
+  .income input {
+    width: 35%;
+    font-size: 1.8rem;
+  }
+  .tag button {
+    font-size: 0.7rem;
+  }
+  .tag {
+    margin: 0;
+  }
+  .inDiv p,
+  .exDiv p {
+    font-size: 1.3rem;
+    width: 40%;
+    text-align: center;
+  }
+  .inDiv #date,
+  .exDiv #t,
+  .exDiv #date {
+    font-size: 0.7rem;
+  }
+  .inDiv button,
+  .exDiv button {
+    font-size: 1rem;
+    height: 20%;
+  }
+  #add {
+    height: 3rem;
+  }
+  .home .add {
+    width: 65%;
+    padding: 1%;
+    font-size: 1.2rem;
+  }
+  .barRow,
+  .balance {
+    gap: 0;
+    justify-content: space-around;
+  }
+  .bar {
+    height: 20%;
+  }
+  .bill-img {
+    right: 5%;
+  }
+  .pastDiv {
+    font-size: 1rem;
+  }
+  .add-expense-wrapper {
+    height: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+  }
+  .summary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  /*tab/laptop*/
+  .nav {
+    font-size: 1.4rem;
+    height: 10vh;
+  }
+  .home,
+  .expenses,
+  .income {
+    font-size: 2rem;
+  }
+  .amt input,
+  #income {
+    width: 35%;
+    font-size: 2rem;
+  }
+  #inAmt {
+    justify-content: space-evenly;
+    height: 25%;
+  }
+  .historylist {
+    height: 65%;
+  }
+  #tagInput {
+    width: 35%;
+    font-size: 2rem;
+    margin: 0;
+  }
+  #inBtn {
+    height: 3rem;
+    width: 8rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .amt p,
+  .tags p {
+    top: 5%;
+  }
+  .tag {
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+  .tag button {
+    font-size: 1.5rem;
+    width: 20%;
+  }
+  .curr {
+    display: flex;
+    flex-direction: column;
+  }
+  .exDiv {
+    gap: 3rem;
+    flex-direction: row;
+    height: 15%;
+    width: 100%;
+    font-size: 2rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .inDiv p {
+    width: 30%;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  .exDiv p {
+    width: 30%;
+    height: auto;
+    text-align: center;
+    font-size: 2rem;
+  }
+  .pDiv-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .inDiv #date,
+  .exDiv #t,
+  .exDiv #date {
+    font-size: 1.2rem;
+    align-content: center;
+  }
+  .exDiv #t {
+    max-height: 2.5rem;
+    height: auto;
+  }
+  .inDiv button,
+  .exDiv button {
+    font-size: 2rem;
+  }
+  #add {
+    font-size: 2rem;
+    height: 3.5rem;
+    width: 20%;
+    margin: 0;
+  }
+  .home .add {
+    width: 80%;
+    padding: 1%;
+    font-size: 2rem;
+  }
+  .barRow,
+  .balance {
+    flex-direction: row;
+    align-items: center;
+  }
+  .inDiv #menu,
+  #menu {
+    height: 2rem;
+    width: 3rem;
+    top: 19%;
+  }
+  .inDiv {
+    gap: 4rem;
+  }
+  .bill-img {
+    right: 10%;
+    top: 35%;
+    width: 6%;
+    height: 35%;
+  }
+  .exForm .close {
+    height: 9%;
+  }
+  .home {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  .add-expense-wrapper {
+    width: 60%;
+    margin: 4rem;
+  }
+
+  .add.subtle-btn {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 1.2rem 0;
+    border-radius: 0.75rem;
+    background: linear-gradient(
+      135deg,
+      var(--bg-button),
+      var(--bg-button-hover)
+    );
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .summary-grid {
+    height: 70%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-content: start;
+  }
+
+  .summary-card {
+    font-size: 1.4rem;
+    padding: 1.3rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  /*laptop*/
+  .amt input,
+  #income {
+    width: 20%;
+  }
+  .amt {
+    max-width: none;
+  }
+  .tags {
+    max-width: none;
+  }
+  .tag button {
+    width: 20%;
+    font-size: 1rem;
+  }
+  #tagInput {
+    font-size: 1.2rem;
+  }
+  #add {
+    font-size: 1.5rem;
+  }
+  #inAmt {
+    height: 30%;
+    justify-content: center;
+    padding: 0.2rem;
+    gap: 0.1rem;
+    margin: 1rem 0;
+  }
+  .amt p {
+    margin: 0;
+  }
+  #income {
+    height: 30%;
+    font-size: 1.5rem;
+  }
+  #inBtn {
+    height: 30%;
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+    width: 7rem;
+  }
+  .inDiv {
+    height: 19%;
+  }
+  .inDiv dd {
+    left: 90%;
+    top: 85%;
+  }
+  .inDiv p {
+    font-size: 1.5rem;
+  }
+  .exDiv {
+    height: 15%;
+  }
+  .exDiv p {
+    font-size: 1.5rem;
+  }
+  .exDiv #t {
+    font-size: 1rem;
+  }
+  .exDiv dd {
+    left: 92%;
+    top: 75%;
+  }
+  .navbar {
+    height: 12vh;
+  }
+  .nav {
+    font-size: 1.3rem;
+  }
+  .home .display {
+    position: relative;
+    height: 70%;
+    justify-content: flex-start;
+    font-size: 1.5rem;
+    gap: 0.2rem;
+  }
+  .summary {
+    position: absolute;
+    bottom: 0;
+  }
+  .summary-card {
+    font-size: 1.2rem;
+    padding: 4px 4px;
+  }
+  .p-header {
+    margin-bottom: 1%;
+  }
+  .home {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 1rem;
+  }
+
+  .add-expense-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+  }
+
+  .add.subtle-btn {
+    font-size: 1.3rem;
+    max-width: 420px;
+    padding: 1.4rem 0;
+    border-radius: 1rem;
+    background: linear-gradient(
+      135deg,
+      var(--bg-button),
+      var(--bg-button-hover)
+    );
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transition:
+      transform 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .add.subtle-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+  }
+
+  .summary-grid {
+    height: 70%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    grid-auto-rows: 1fr;
+  }
+
+  .summary-card {
+    font-size: 1.2rem;
+    padding: 2rem;
+  }
+
+  .progress-bar-wrapper {
+    height: 14px;
+  }
+  .progress-bar {
+    height: 14px;
+  }
+  .historylist {
+    padding-top: 0;
+  }
+}
