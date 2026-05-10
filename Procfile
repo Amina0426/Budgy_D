@@ -1,0 +1,1 @@
+web: gunicorn budgy_project.wsgi:application
