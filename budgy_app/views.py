@@ -10,9 +10,10 @@ from .serializers import IncomeSerializer,ExpenseSerializer,BudgetSerializer
 from django.contrib.auth.decorators import login_required
 import cloudinary.uploader
 
-@login_required(login_url="login")
+
+@login_required(login_url="/")
 def index_page(request):
-    return render(request,'budgy_app/index.html')
+    return render(request, "budgy_app/index.html")
 
 class IncomeViewSet(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
@@ -52,35 +53,54 @@ def reset(request):
 
 def login_view(request):
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        remember = request.POST.get("remember")  
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
+        remember = request.POST.get("remember")
+
+        if not username or not password:
+            return render(request, "budgy_app/login.html", {
+                "error": "Username and password required"
+            })
 
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+
+        if user:
             login(request, user)
-            if remember:
-                request.session.set_expiry(60 * 60 * 24 * 30)
-            else:
-                request.session.set_expiry(0)
 
-            return redirect("/app/") 
+            request.session.set_expiry(
+                60 * 60 * 24 * 30 if remember else 0
+            )
+
+            return redirect("/app/")
         else:
-            return render(request, "budgy_app/login.html", {"error": "Invalid credentials"})
-    return render(request, "budgy_app/login.html")
+            return render(request, "budgy_app/login.html", {
+                "error": "Invalid credentials"
+            })
 
+    return render(request, "budgy_app/login.html")
 from django.contrib.auth.models import User
+
+from django.db import IntegrityError
 
 def signup_view(request):
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        if User.objects.filter(username=username).exists():
-            return render(request, "budgy_app/signup.html", {"error": "Username taken"})
-        User.objects.create_user(username=username, password=password)
-        return redirect("login")
-    return render(request, "budgy_app/signup.html")
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
 
+        if not username or not password:
+            return render(request, "budgy_app/signup.html", {
+                "error": "All fields required"
+            })
+
+        try:
+            User.objects.create_user(username=username, password=password)
+            return redirect("/login/")
+        except IntegrityError:
+            return render(request, "budgy_app/signup.html", {
+                "error": "Username already exists"
+            })
+
+    return render(request, "budgy_app/signup.html")
 from django.contrib.auth import logout
 
 def logout_view(request):
