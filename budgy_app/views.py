@@ -63,7 +63,7 @@ def login_view(request):
             else:
                 request.session.set_expiry(0)
 
-            return redirect("index") 
+            return redirect("/app/") 
         else:
             return render(request, "budgy_app/login.html", {"error": "Invalid credentials"})
     return render(request, "budgy_app/login.html")
