@@ -8,6 +8,7 @@ router.register(r'expenses',views.ExpenseViewSet,basename='expenses')
 router.register(r'budgets',views.BudgetViewSet,basename='budgets')
 
 urlpatterns = [
+    path('api/me/', views.current_user, name='current_user'),
     path('',views.login_view,name='login'),
     path("signup/", views.signup_view, name="signup"),
     path("logout/", views.logout_view, name="logout"),

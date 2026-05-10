@@ -61,11 +61,32 @@ function attachGlobalListeners() {
   // Settings modal
   document.querySelector("#set")?.addEventListener("click", openSetModal);
 }
+async function checkAuth() {
+  try {
+    const res = await fetch("/api/me/", {
+      credentials: "include",
+    });
 
-window.addEventListener("DOMContentLoaded", () => {
+    if (!res.ok) {
+      window.location.href = "/";
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    window.location.href = "/";
+    return false;
+  }
+}
+window.addEventListener("DOMContentLoaded", async () => {
+  const authenticated = await checkAuth();
+
+  if (!authenticated) return;
+
   initiaLoad();
   attachGlobalListeners();
   monthlyLimit();
+
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
   }

@@ -14,7 +14,12 @@ import cloudinary.uploader
 @login_required(login_url="/")
 def index_page(request):
     return render(request, "budgy_app/index.html")
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def current_user(request):
+    return Response({
+        "username": request.user.username
+    })
 class IncomeViewSet(viewsets.ModelViewSet):
     permission_classes=[IsAuthenticated]
     serializer_class = IncomeSerializer
@@ -47,8 +52,9 @@ class BudgetViewSet(viewsets.ModelViewSet):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def reset(request):
-    Expenses.objects.all().delete()
-    Incomes.objects.all().delete()
+    Expenses.objects.filter(user=request.user).delete()
+    Incomes.objects.filter(user=request.user).delete()
+    Budget.objects.filter(user=request.user).delete()
     return Response({"message": "All data deleted."}, status=status.HTTP_204_NO_CONTENT)
 
 def login_view(request):
@@ -93,8 +99,21 @@ def signup_view(request):
             })
 
         try:
-            User.objects.create_user(username=username, password=password)
-            return redirect("/")
+            if User.objects.filter(username=username).exists():
+                return render(request, "budgy_app/signup.html", {
+                    "error": "Username taken"
+                })
+
+            user = User.objects.create_user(
+                username=username,
+                password=password
+            )
+
+            # auto login immediately after signup
+            login(request, user)
+
+            return redirect("/app/")
+
         except IntegrityError:
             return render(request, "budgy_app/signup.html", {
                 "error": "Username already exists"
