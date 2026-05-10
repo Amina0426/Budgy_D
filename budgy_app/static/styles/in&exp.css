@@ -200,7 +200,7 @@
 .curr {
   width: 95%;
   height: 94%;
-  padding-bottom: 3rem;
+  padding: 0.5rem 1rem 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
@@ -219,7 +219,7 @@
 .inDiv button,
 .exDiv button {
   width: 15%;
-  font-size: 2rem;
+  font-size: 1.8rem;
   height: auto;
 }
 
@@ -230,6 +230,7 @@
   top: 50%;
   right: 4%;
 }
+
 .expenses {
   color: var(--text-main);
   position: relative;
@@ -305,29 +306,6 @@
 .filter-dropdown button:hover {
   background-color: var(--bg-nav);
   color: white;
-}
-
-.curr {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-  padding: 0.5rem 1rem 3rem;
-  align-content: start;
-}
-
-.inDiv button,
-.exDiv button {
-  width: 15%;
-  font-size: 2rem;
-  height: auto;
-}
-
-.bill-img {
-  width: 30%;
-  height: 30%;
-  position: absolute;
-  top: 50%;
-  right: 4%;
 }
 
 .img-count-badge {

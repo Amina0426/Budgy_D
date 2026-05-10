@@ -45,10 +45,11 @@ class BudgetViewSet(viewsets.ModelViewSet):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def reset(request):
-    Expenses.objects.all().delete()
-    Incomes.objects.all().delete()
-    return Response({"message": "All data deleted."}, status=status.HTTP_204_NO_CONTENT)
+    Expenses.objects.filter(user=request.user).delete()
+    Incomes.objects.filter(user=request.user).delete()
+    Budget.objects.filter(user=request.user).delete()
 
+    return Response({"message": "All data deleted."}, status=204)
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")

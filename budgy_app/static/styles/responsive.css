@@ -127,25 +127,23 @@
     flex-direction: column;
   }
   .exDiv {
-    gap: 3rem;
+    display: flex;
     flex-direction: row;
-    height: 15%;
-    width: 100%;
-    font-size: 2rem;
-    flex-wrap: nowrap;
     align-items: center;
+    flex-wrap: nowrap;
     justify-content: flex-start;
+    gap: 1rem;
   }
   .inDiv p {
     width: 30%;
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   .exDiv p {
-    width: 30%;
     height: auto;
+    width: 25%;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .pDiv-content {
     display: flex;
@@ -154,7 +152,7 @@
   .inDiv #date,
   .exDiv #t,
   .exDiv #date {
-    font-size: 1.2rem;
+    font-size: 1rem;
     align-content: center;
   }
   .exDiv #t {
@@ -163,7 +161,8 @@
   }
   .inDiv button,
   .exDiv button {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    width: 10%;
   }
   #add {
     font-size: 2rem;
@@ -189,12 +188,7 @@
   }
   .inDiv {
     gap: 4rem;
-  }
-  .bill-img {
-    right: 10%;
-    top: 35%;
-    width: 6%;
-    height: 35%;
+    height: auto;
   }
   .exForm .close {
     height: 9%;
@@ -237,6 +231,26 @@
   .summary-card {
     font-size: 1.4rem;
     padding: 1.3rem;
+  }
+  .bill-images-wrapper {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    right: 10%;
+  }
+  .bill-images {
+    height: 100%;
+    position: relative;
+  }
+  .bill-img {
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    right: 10%;
+    top: 15%;
+  }
+  .img-count-badge {
+    top: 60%;
   }
 }
 @media screen and (min-width: 1000px) {

@@ -73,7 +73,6 @@ const API_EXPENSES = "/api/expenses/";
 export async function downloadData() {
   try {
     const res = await fetch(API_EXPENSES, {
-      method,
       credentials: "include",
     });
     if (!res.ok) throw new Error("Failed to fetch expenses");
@@ -83,7 +82,7 @@ export async function downloadData() {
       amount: e.amount,
       tag: e.tag,
       date: e.date,
-      ...(e.img ? { img: "[image omitted]" } : {}),
+      images: (e.images || [])?.map((img) => img.image),
     }));
 
     const data = {
@@ -108,7 +107,7 @@ export async function downloadData() {
 // Reset app by deleting all expenses
 export async function resetApp() {
   const confirmReset = confirm(
-    "Are you sure you want to reset all data? This cannot be undone."
+    "Are you sure you want to reset all data? This cannot be undone.",
   );
   if (!confirmReset) return;
 
