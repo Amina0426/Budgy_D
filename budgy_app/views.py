@@ -94,7 +94,7 @@ def signup_view(request):
 
         try:
             User.objects.create_user(username=username, password=password)
-            return redirect("/login/")
+            return redirect("/")
         except IntegrityError:
             return render(request, "budgy_app/signup.html", {
                 "error": "Username already exists"
