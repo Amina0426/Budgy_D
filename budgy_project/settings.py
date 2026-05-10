@@ -151,5 +151,5 @@ LOGOUT_REDIRECT_URL = 'login'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CSRF_TRUSTED_ORIGINS = [
-    
+    "https://budgy-q39z.onrender.com"
 ]
