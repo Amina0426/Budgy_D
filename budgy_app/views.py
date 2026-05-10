@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import IncomeSerializer,ExpenseSerializer,BudgetSerializer
 from django.contrib.auth.decorators import login_required
+import cloudinary.uploader
 
 @login_required(login_url="login")
 def index_page(request):
@@ -86,3 +87,73 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+
+def upload_expense_images(request, expense_id):
+
+    try:
+        expense = Expenses.objects.get(
+            id=expense_id,
+            user=request.user
+        )
+
+    except Expenses.DoesNotExist:
+
+        return Response(
+            {"error": "Expense not found"},
+            status=404
+        )
+
+    files = request.FILES.getlist('images')
+
+    if not files:
+
+        return Response(
+            {"error": "No files uploaded"},
+            status=400
+        )
+
+    created = []
+
+    for file in files:
+
+        img = ExpenseImage.objects.create(
+            expense=expense,
+            image=file
+        )
+
+        created.append(img.image.url)
+
+    return Response({
+        "message": "Images uploaded successfully",
+        "images": created
+    })
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+
+def delete_expense_image(request, image_id):
+
+    try:
+
+        image = ExpenseImage.objects.get(
+            id=image_id,
+            expense__user=request.user
+        )
+
+    except ExpenseImage.DoesNotExist:
+
+        return Response(
+            {"error": "Image not found"},
+            status=404
+        )
+
+    cloudinary.uploader.destroy(
+        image.image.name
+    )
+
+    image.delete()
+
+    return Response({
+        "message": "Image deleted"
+    })
