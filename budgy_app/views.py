@@ -1,15 +1,15 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Incomes,Expenses,Budget,ExpenseImage
+from .models import Incomes,Expenses,Budget
 from rest_framework import viewsets,status
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import IncomeSerializer,ExpenseSerializer,BudgetSerializer
 from django.contrib.auth.decorators import login_required
-import cloudinary.uploader
 
+@login_required(login_url="login")
 def index_page(request):
     return render(request,'budgy_app/index.html')
 
@@ -45,11 +45,10 @@ class BudgetViewSet(viewsets.ModelViewSet):
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def reset(request):
-    Expenses.objects.filter(user=request.user).delete()
-    Incomes.objects.filter(user=request.user).delete()
-    Budget.objects.filter(user=request.user).delete()
+    Expenses.objects.all().delete()
+    Incomes.objects.all().delete()
+    return Response({"message": "All data deleted."}, status=status.HTTP_204_NO_CONTENT)
 
-    return Response({"message": "All data deleted."}, status=204)
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -87,73 +86,3 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-
-def upload_expense_images(request, expense_id):
-
-    try:
-        expense = Expenses.objects.get(
-            id=expense_id,
-            user=request.user
-        )
-
-    except Expenses.DoesNotExist:
-
-        return Response(
-            {"error": "Expense not found"},
-            status=404
-        )
-
-    files = request.FILES.getlist('images')
-
-    if not files:
-
-        return Response(
-            {"error": "No files uploaded"},
-            status=400
-        )
-
-    created = []
-
-    for file in files:
-
-        img = ExpenseImage.objects.create(
-            expense=expense,
-            image=file
-        )
-
-        created.append(img.image.url)
-
-    return Response({
-        "message": "Images uploaded successfully",
-        "images": created
-    })
-@api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
-
-def delete_expense_image(request, image_id):
-
-    try:
-
-        image = ExpenseImage.objects.get(
-            id=image_id,
-            expense__user=request.user
-        )
-
-    except ExpenseImage.DoesNotExist:
-
-        return Response(
-            {"error": "Image not found"},
-            status=404
-        )
-
-    cloudinary.uploader.destroy(
-        image.image.name
-    )
-
-    image.delete()
-
-    return Response({
-        "message": "Image deleted"
-    })

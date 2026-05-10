@@ -8,10 +8,10 @@ router.register(r'expenses',views.ExpenseViewSet,basename='expenses')
 router.register(r'budgets',views.BudgetViewSet,basename='budgets')
 
 urlpatterns = [
-    path('login/',views.login_view,name='login'),
+    path('',views.login_view,name='login'),
     path("signup/", views.signup_view, name="signup"),
     path("logout/", views.logout_view, name="logout"),
-    path('', views.index_page, name='index'),
+    path('app/', views.index_page, name='index'),
     path('api/', include(router.urls)),
     path(
     'api/expenses/<int:expense_id>/images/',
