@@ -123,6 +123,7 @@ CSRF_COOKIE_SECURE = True
 
 CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_HTTPONLY = False
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
