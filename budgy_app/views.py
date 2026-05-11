@@ -79,7 +79,8 @@ def login_view(request):
                 request.session.set_expiry(60 * 60 * 24 * 30)
             else:
                 request.session.set_expiry(0)
-
+            print("REMEMBER:", remember)
+            print("EXPIRY:", request.session.get_expiry_age())
             return redirect("/app/")
         else:
             return render(request, "budgy_app/login.html", {
