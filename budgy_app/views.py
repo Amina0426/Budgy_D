@@ -158,13 +158,18 @@ def upload_expense_images(request, expense_id):
     created = []
 
     for file in files:
+        try:
+            img = ExpenseImage.objects.create(
+                expense=expense,
+                image=file
+            )
 
-        img = ExpenseImage.objects.create(
-            expense=expense,
-            image=file
-        )
+            created.append(img.image.url)
 
-        created.append(img.image.url)
+        except Exception as e:
+            return Response({
+                "error": str(e)
+            }, status=500)
 
     return Response({
         "message": "Images uploaded successfully",
