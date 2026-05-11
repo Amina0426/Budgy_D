@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import IncomeSerializer,ExpenseSerializer,BudgetSerializer
 from django.contrib.auth.decorators import login_required
 import cloudinary.uploader
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import parser_classes
 
 
 @login_required(login_url="/")
@@ -128,7 +130,7 @@ def logout_view(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-
+@parser_classes([MultiPartParser, FormParser])
 def upload_expense_images(request, expense_id):
 
     try:
