@@ -82,6 +82,10 @@
     font-size: 1.4rem;
     height: 10vh;
   }
+  .exForm .amt,
+  .tags {
+    max-width: none;
+  }
   .home,
   .expenses,
   .income {

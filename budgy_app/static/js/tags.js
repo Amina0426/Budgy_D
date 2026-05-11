@@ -1,7 +1,7 @@
 export let selectedTag = { value: "" };
 export function AbouTags(tags, addTag) {
   if (!tags || !addTag) return;
-  [("click", "touchend")].forEach((e) => {
+  ["click", "touchend"].forEach((e) => {
     tags.forEach((tag) => {
       tag.addEventListener(e, () => {
         selectedTag.value = tag.textContent;

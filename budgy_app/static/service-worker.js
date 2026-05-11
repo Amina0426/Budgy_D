@@ -1,9 +1,11 @@
-const CACHE_NAME = "expense-cache-v0.5.1";
+const CACHE_NAME = "expense-cache-v1.0.0";
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
         "/",
+        "/app/",
         "/static/styles/base.css",
         "/static/js/main.js",
         "/static/manifest.json",
@@ -11,8 +13,9 @@ self.addEventListener("install", (event) => {
         "/static/icons/icon-512x512.png",
         "/static/icons/favicon.ico",
       ]);
-    })
+    }),
   );
+
   self.skipWaiting();
 });
 
@@ -22,10 +25,11 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         cacheNames
           .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+          .map((name) => caches.delete(name)),
       );
-    })
+    }),
   );
+
   self.clients.claim();
 });
 
@@ -37,16 +41,18 @@ self.addEventListener("fetch", (event) => {
       if (cachedResponse) {
         return cachedResponse;
       }
+
       return fetch(event.request)
         .then((networkResponse) => {
           return caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, networkResponse.clone());
+
             return networkResponse;
           });
         })
         .catch(() => {
-          return caches.match("/index.html");
+          return caches.match("/");
         });
-    })
+    }),
   );
 });
