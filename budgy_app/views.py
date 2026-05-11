@@ -158,6 +158,7 @@ def upload_expense_images(request, expense_id):
     created = []
 
     for file in files:
+
         try:
             img = ExpenseImage.objects.create(
                 expense=expense,
@@ -167,6 +168,7 @@ def upload_expense_images(request, expense_id):
             created.append(img.image.url)
 
         except Exception as e:
+
             return Response({
                 "error": str(e)
             }, status=500)
@@ -175,6 +177,7 @@ def upload_expense_images(request, expense_id):
         "message": "Images uploaded successfully",
         "images": created
     })
+
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 
