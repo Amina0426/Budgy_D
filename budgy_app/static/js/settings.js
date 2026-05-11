@@ -34,10 +34,45 @@ export async function monthlyLimit() {
   }
 
   // Save/update on change
-  budgetInput.addEventListener("change", async () => {
-    const amount = parseFloat(budgetInput.value);
-    if (isNaN(amount) || amount <= 0) {
-      alert("Enter a valid budget amount");
+  // budgetInput.addEventListener("change", async () => {
+  //   const amount = parseFloat(budgetInput.value);
+  //   if (isNaN(amount) || amount <= 0) {
+  //     alert("Enter a valid budget amount");
+  //     return;
+  //   }
+
+  //   const budgetId = budgetInput.dataset.budgetId;
+  //   const method = budgetId ? "PATCH" : "POST";
+  //   const url = budgetId ? `${API_BUDGET}${budgetId}/` : API_BUDGET;
+
+  //   try {
+  //     const res = await fetch(url, {
+  //       method,
+  //       credentials: "include",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "X-CSRFToken": getCSRF(),
+  //       },
+  //       body: JSON.stringify({ amount }),
+  //     });
+  //     if (!res.ok) throw new Error("Failed to save budget");
+  //     const data = await res.json();
+  //     budgetInput.dataset.budgetId = data.id;
+  //     popMssg("Budget saved successfully!");
+  //     track();
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Failed to save budget");
+  //   }
+  // });
+
+  const saveBtn = document.getElementById("saveBudgetBtn");
+
+  saveBtn.addEventListener("click", async () => {
+    const amount = Number(budgetInput.value);
+
+    if (!amount || amount <= 0) {
+      popMssg("Enter a valid budget amount");
       return;
     }
 
@@ -55,14 +90,19 @@ export async function monthlyLimit() {
         },
         body: JSON.stringify({ amount }),
       });
+
       if (!res.ok) throw new Error("Failed to save budget");
+
       const data = await res.json();
+
       budgetInput.dataset.budgetId = data.id;
+
       popMssg("Budget saved successfully!");
+
       track();
     } catch (err) {
       console.error(err);
-      alert("Failed to save budget");
+      popMssg("Failed to save budget");
     }
   });
 }

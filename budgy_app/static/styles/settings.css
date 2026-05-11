@@ -114,7 +114,7 @@
   font-size: 0.95rem;
   outline: none;
   background-color: var(--bg-main);
-  color: var(--text-ondark);
+  color: var(--text-main);
 }
 
 .input:focus {
