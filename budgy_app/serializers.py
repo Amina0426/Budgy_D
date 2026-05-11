@@ -7,9 +7,11 @@ class IncomeSerializer(serializers.ModelSerializer):
         fields = ['id', 'amount', 'date']
 class ExpenseImageSerializer(serializers.ModelSerializer):
 
+    image = serializers.ImageField(use_url=True)
+
     class Meta:
         model = ExpenseImage
-        fields = ['id','image']
+        fields = ['id', 'image']
 class ExpenseSerializer(serializers.ModelSerializer):
     images=ExpenseImageSerializer(
         many= True,

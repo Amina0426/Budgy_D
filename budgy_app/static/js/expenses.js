@@ -292,7 +292,6 @@ export async function editExpense(id) {
 //   input.click();
 // }
 export function addPic(id) {
-  console.log("NEW addPic");
   const input = document.createElement("input");
 
   input.type = "file";
