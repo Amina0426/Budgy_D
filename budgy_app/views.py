@@ -75,9 +75,10 @@ def login_view(request):
         if user:
             login(request, user)
 
-            request.session.set_expiry(
-                60 * 60 * 24 * 30 if remember else 0
-            )
+            if remember:
+                request.session.set_expiry(60 * 60 * 24 * 30)
+            else:
+                request.session.set_expiry(0)
 
             return redirect("/app/")
         else:
