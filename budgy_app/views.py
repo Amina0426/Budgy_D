@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 import cloudinary.uploader
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import parser_classes
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 @login_required(login_url="/")
@@ -58,7 +59,7 @@ def reset(request):
     Incomes.objects.filter(user=request.user).delete()
     Budget.objects.filter(user=request.user).delete()
     return Response({"message": "All data deleted."}, status=status.HTTP_204_NO_CONTENT)
-
+@ensure_csrf_cookie
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
@@ -91,7 +92,7 @@ def login_view(request):
 from django.contrib.auth.models import User
 
 from django.db import IntegrityError
-
+@ensure_csrf_cookie
 def signup_view(request):
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
