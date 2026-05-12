@@ -1,4 +1,4 @@
-const CACHE_NAME = "expense-cache-v1.0.0";
+const CACHE_NAME = "expense-cache-v0.9.1";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -37,22 +37,24 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-
-            return networkResponse;
-          });
-        })
-        .catch(() => {
-          return caches.match("/");
+    fetch(event.request)
+      .then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
         });
-    }),
+      })
+      .catch(async () => {
+        const cachedResponse = await caches.match(event.request);
+
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // offline navigation fallback
+        if (event.request.mode === "navigate") {
+          return caches.match("/app/");
+        }
+      }),
   );
 });
