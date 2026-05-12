@@ -61,6 +61,8 @@ def reset(request):
     return Response({"message": "All data deleted."}, status=status.HTTP_204_NO_CONTENT)
 @ensure_csrf_cookie
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect("/app/")
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
         password = request.POST.get("password", "")
