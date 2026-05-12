@@ -62,7 +62,10 @@ def reset(request):
 @ensure_csrf_cookie
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("/app/")
+        if request.session.get("remember_me"):
+            return redirect("/app/")
+        else:
+            logout(request)
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
         password = request.POST.get("password", "")
@@ -78,12 +81,12 @@ def login_view(request):
         if user:
             login(request, user)
 
+            request.session["remember_me"] = remember
+
             if remember:
-                request.session.set_expiry(60 * 60 * 24 * 30)
+                 request.session.set_expiry(60 * 60 * 24 * 30)
             else:
                 request.session.set_expiry(0)
-            print("REMEMBER:", remember)
-            print("EXPIRY:", request.session.get_expiry_age())
             return redirect("/app/")
         else:
             return render(request, "budgy_app/login.html", {
@@ -94,6 +97,7 @@ def login_view(request):
 from django.contrib.auth.models import User
 
 from django.db import IntegrityError
+
 @ensure_csrf_cookie
 def signup_view(request):
     if request.method == "POST":
