@@ -89,7 +89,7 @@ export function addIncome() {
       popMssg(`Rs.${income.amount} added to incomes!`);
     } catch (err) {
       console.error(err);
-      popMssg("Failed to add income.");
+      popMssg("Failed to add income. Check Internet.");
     }
   });
 }

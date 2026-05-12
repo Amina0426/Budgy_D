@@ -67,15 +67,25 @@ async function checkAuth() {
       credentials: "include",
     });
 
-    if (!res.ok) {
+    // only redirect on actual auth failure
+    if (res.status === 401 || res.status === 403) {
       window.location.href = "/";
       return false;
     }
 
+    // temporary/network/server issue
+    if (!res.ok) {
+      console.error("Auth check failed:", res.status);
+      return true;
+    }
+
     return true;
   } catch (err) {
-    window.location.href = "/";
-    return false;
+    console.error("Network/auth error:", err);
+
+    // do NOT redirect on network failure
+    // allows offline/PWA usage
+    return true;
   }
 }
 window.addEventListener("DOMContentLoaded", async () => {

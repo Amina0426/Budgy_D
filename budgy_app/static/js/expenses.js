@@ -235,7 +235,7 @@ export async function addExpenses() {
     popMssg(`Rs.${expense.amount} - ${expense.tag} added!`);
   } catch (err) {
     console.error(err);
-    popMssg("Failed to add expense.");
+    popMssg("Failed to add expense. Check Internet.");
   }
 }
 
@@ -261,36 +261,6 @@ export async function editExpense(id) {
 }
 
 // -------------------- Add Bill Image --------------------
-// export function addPic(id) {
-//   const input = document.createElement("input");
-//   input.type = "file";
-//   input.accept = "image/*";
-
-//   input.onchange = async () => {
-//     const file = input.files[0];
-//     if (!file) return;
-
-//     const formData = new FormData();
-//     formData.append("img", file);
-
-//     try {
-//       await fetch(`/api/expenses/${id}/`, {
-//         method: "PATCH",
-//         credentials: "include",
-//         headers: {
-//           "X-CSRFToken": getCSRF(),
-//         },
-//         body: formData,
-//       });
-//       await displayExpense();
-//     } catch (err) {
-//       console.error(err);
-//       popMssg("Failed to upload image.");
-//     }
-//   };
-
-//   input.click();
-// }
 export function addPic(id) {
   const input = document.createElement("input");
 
