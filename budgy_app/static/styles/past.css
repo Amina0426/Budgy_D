@@ -23,7 +23,7 @@
   gap: 1rem;
   border-radius: 5px;
   border: solid var(--border-color);
-  color: var(--text-subtle);
+  color: var(--text-card);
   background-color: var(--bg-card);
   box-shadow: var(--shadow);
   font-size: 1.1rem;

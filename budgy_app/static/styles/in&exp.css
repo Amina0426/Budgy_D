@@ -117,14 +117,14 @@
   min-width: 4rem;
   max-width: max-content;
   border-radius: 999px;
-  background-color: var(--bg-nav);
+  background-color: var(--bg-button);
   color: var(--text-nav);
   white-space: nowrap;
 }
 
 .menu {
   cursor: pointer;
-  color: var(--text-subtle);
+  color: var(--text-card);
   background-color: var(--bg-card);
   width: 2rem;
   font-size: 1.5rem;
@@ -145,7 +145,7 @@
   height: auto;
   width: 5.5rem;
   top: 30%;
-  left: 50%;
+  right: 5%;
   background-color: var(--bg-button-hover);
   border-radius: 5px;
   z-index: 10;
@@ -164,7 +164,7 @@
   background: none;
   cursor: pointer;
   width: 100%;
-  color: var(--text-subtle);
+  color: var(--text-button);
   margin: 0.3rem;
   font-size: 1rem;
 }
