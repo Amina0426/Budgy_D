@@ -27,7 +27,7 @@ body {
 
 /* ---------- Headings ---------- */
 .auth-container h2 {
-  color: var(--text-accent);
+  color: var(--accent);
   margin-bottom: 1.5rem;
   font-size: 2.5rem;
   font-weight: 600;
@@ -49,14 +49,14 @@ form {
   border-radius: 8px;
   font-size: 2rem;
   background: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
   transition: border 0.2s;
 }
 
 .auth-container input[type="text"]:focus,
 .auth-container input[type="password"]:focus {
   outline: none;
-  border-color: var(--text-accent);
+  border-color: var(--accent);
 }
 
 /* ---------- Buttons ---------- */
@@ -86,11 +86,11 @@ form {
 #checkbox {
   height: 1.8rem;
   width: 1.8rem;
-  accent-color: var(--text-accent);
+  accent-color: var(--accent);
 }
 
 .auth-container a {
-  color: var(--text-accent);
+  color: var(--accent);
   text-decoration: none;
 }
 

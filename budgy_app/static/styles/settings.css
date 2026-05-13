@@ -1,8 +1,8 @@
 #set {
   position: fixed;
-  top: 0;
+  top: -1%;
   left: 0;
-  height: 5vh;
+  height: 7vh;
   aspect-ratio: 1;
   border-radius: 5px;
   font-size: 2.5rem;
@@ -34,6 +34,7 @@
 /* Panel (main container) */
 .settings-panel {
   background: var(--bg-main);
+  color: var(--text-main);
   width: 100%;
   max-width: 700px;
   height: 100vh;
@@ -63,7 +64,7 @@
 }
 
 .settings-header .username {
-  color: var(--text-accent);
+  color: var(-accent);
   font-weight: 500;
   font-size: 1rem;
 }
@@ -126,7 +127,7 @@
   margin: 0.4rem 0;
   padding: 0.5rem 1rem;
   background-color: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
   border: none;
   border-radius: 6px;
   font-size: 1rem;

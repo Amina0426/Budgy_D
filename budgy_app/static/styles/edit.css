@@ -18,7 +18,7 @@
   max-width: 400px;
   text-align: center;
   box-shadow: var(--shadow);
-  color: var(--text-main);
+  color: var(--text-card);
 }
 #editModalBox input {
   display: block;

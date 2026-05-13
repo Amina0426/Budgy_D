@@ -1,6 +1,6 @@
 /*navbar*/
 .navbar {
-  color: var(--text-ondark);
+  color: var(--text-nav);
   display: flex;
   flex-direction: column;
   position: fixed;

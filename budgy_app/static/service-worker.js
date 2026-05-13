@@ -1,4 +1,4 @@
-const CACHE_NAME = "expense-cache-v1.0.0";
+const CACHE_NAME = "budgy-cache-v1.0.0";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

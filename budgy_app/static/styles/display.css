@@ -9,7 +9,7 @@
 /* Cards */
 .summary-card {
   background-color: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
   padding: 1rem;
   border-radius: 0.5rem;
   text-align: center;

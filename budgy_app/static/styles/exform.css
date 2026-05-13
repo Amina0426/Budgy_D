@@ -16,6 +16,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--bg-main);
+  color: var(--text-main);
   min-height: 100%;
   width: 100%;
   padding: 2rem 1rem;
@@ -60,7 +61,7 @@
 .amt,
 .tags {
   background-color: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
   border-radius: 1rem;
   width: 90%;
   max-width: 400px;
@@ -94,7 +95,9 @@
   color: var(--text-main);
   font-size: 1rem;
   outline: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .amt input:focus,
 #tagInput:focus {
@@ -114,7 +117,7 @@
 
 .tag button {
   background-color: var(--bg-card);
-  color: var(--text-main);
+  color: var(--text-card);
   border: 2px solid var(--text-subtle);
   border-radius: 2rem;
   padding: 0.4rem 1rem;
@@ -151,7 +154,9 @@
   font-weight: 500;
   cursor: pointer;
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 #add:hover {
   transform: scale(1.05);

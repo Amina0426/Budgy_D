@@ -1,11 +1,10 @@
 #inAmt {
   background-color: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
   border-radius: 1rem;
   box-shadow: var(--shadow);
   padding: 1.5rem;
   width: 90%;
-  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,10 +19,14 @@
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
+#inAmt p {
+  margin: 0;
+}
+
 #income {
   font-size: 1.4rem;
   height: 3rem;
-  width: 70%;
+  width: 50%;
   text-align: center;
   border-radius: 0.6rem;
   border: 2px solid var(--text-subtle);
@@ -40,8 +43,8 @@
 }
 
 #inBtn {
-  padding: 0.6rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.3rem 1.3rem;
+  font-size: 1rem;
   border-radius: 2rem;
   border: none;
   background: linear-gradient(135deg, var(--bg-button), var(--bg-button-hover));
@@ -63,6 +66,7 @@
   align-content: flex-start;
   flex-direction: column;
   background-color: var(--bg-card);
+  color: var(--text-card);
   border-radius: 5px;
   margin: 1%;
   margin-left: 2.3%;
@@ -89,7 +93,7 @@
   width: 40%;
   font-size: 1.5rem;
   padding: 1%;
-  color: var(--text-subtle);
+  color: var(--text-card);
   text-align: left;
 }
 .exDiv p {
@@ -102,7 +106,7 @@
   font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
-  color: var(--text-subtle);
+  color: var(--text-card);
 }
 
 .exDiv #t {
@@ -113,8 +117,8 @@
   min-width: 4rem;
   max-width: max-content;
   border-radius: 999px;
-  background-color: var(--text-accent);
-  color: var(--bg-card);
+  background-color: var(--bg-nav);
+  color: var(--text-nav);
   white-space: nowrap;
 }
 
@@ -177,12 +181,12 @@
 .historylist {
   width: 90%;
   height: 60%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   box-shadow: var(--shadow);
   border-radius: 5px;
   padding: 2%;
   background-color: var(--bg-box);
-  color: var(--text-main);
+  color: var(--text-box);
 }
 
 .incList {
@@ -213,6 +217,7 @@
   scrollbar-width: none;
   z-index: 1;
   background-color: var(--bg-main);
+  color: var(--text-main);
   align-content: start;
 }
 
@@ -248,6 +253,7 @@
   overflow-y: auto;
   transition: flex 0.3s ease;
   scrollbar-width: none;
+  color: var(--text-main);
 }
 
 .curr-header {
@@ -256,6 +262,7 @@
   align-items: center;
   padding: 0.6rem 1rem;
   background-color: var(--bg-card);
+  color: var(--text-card);
   border-radius: 5px 5px 0 0;
   font-size: 1rem;
   position: sticky;
@@ -268,9 +275,9 @@
 }
 
 .filter-btn {
-  background-color: var(--bg-nav);
+  background-color: var(--bg-button);
   border: none;
-  color: #fff;
+  color: var(--text-button);
   border-radius: 5px;
   padding: 0.3rem 0.8rem;
   cursor: pointer;
@@ -287,6 +294,7 @@
   border-radius: 5px;
   box-shadow: var(--shadow);
   overflow: hidden;
+  color: var(--text-card);
 }
 
 .filter-dropdown.show {
@@ -305,7 +313,7 @@
 
 .filter-dropdown button:hover {
   background-color: var(--bg-nav);
-  color: white;
+  color: var(--text-nav);
 }
 
 .img-count-badge {
