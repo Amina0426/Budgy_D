@@ -7,7 +7,7 @@
 
 **Budgy** is a modern full-stack expense tracker built with Django, Django REST Framework, and vanilla JavaScript. It offers secure authentication, financial summaries, budget management, receipt uploads, and offline support with PWA capabilities.
 
-[Live Demo](YOUR_RENDER_LINK)
+[Live Demo](https://budgy-q39z.onrender.com)
 
 ---
 
@@ -54,59 +54,6 @@ Budgy helps users manage personal finances through an intuitive web interface. U
 - Add expense / upload receipt screen
 - Budget and history views
 
-## Project Structure
-
-- `manage.py` — Django command-line utility
-- `budgy_project/` — project settings, URL configuration, WSGI/ASGI entry points
-- `budgy_app/` — application logic, models, views, serializers, templates, and static files
-- `media/` — uploaded expense images and receipts
-- `db.sqlite3` — local SQLite database file
-
-## Installation
-
-Clone the repository and install dependencies.
-
-```bash
-git clone YOUR_GITHUB_REPO_LINK
-cd travel-django
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-## Environment Setup
-
-Create a `.env` file in the project root or configure environment variables in `budgy_project/settings.py`.
-
-Example `.env` values:
-
-```env
-SECRET_KEY=your_secret_key_here
-DEBUG=True
-ALLOWED_HOSTS=127.0.0.1,localhost
-```
-
-> If you use `.env`, ensure the settings loader reads it before Django starts.
-
-## Database Migrations
-
-Run migrations to prepare the local database.
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-## Run the Server
-
-Start the local Django development server.
-
-```bash
-python manage.py runserver
-```
-
-Open `http://127.0.0.1:8000/` in your browser.
-
 ## PWA & Offline Support
 
 Budgy includes a PWA manifest and a service worker to enable offline capability and installable behavior. This improves load performance and provides a better mobile experience.
@@ -126,12 +73,11 @@ Authentication is required for protected endpoints.
 
 Budgy is deployed on Render. The deployed version uses Django static file handling and service worker registration for PWA support.
 
-- Live demo: [YOUR_RENDER_LINK](YOUR_RENDER_LINK)
+- Live demo: [LINK](https://budgy-q39z.onrender.com)
 
 ## Future Improvements
 
 - Add automated tests for authentication and API endpoints
-- Improve budget handling with one active monthly budget per user
 - Add charts and visual financial analytics
 - Enhance receipt image management and cleanup
 - Support data import/export for user financial history
@@ -148,14 +94,6 @@ Contributions are welcome. To contribute:
 6. Open a pull request
 
 Please keep contributions focused and well documented.
-
-## License
-
-This project is open source. Add your preferred license here, for example:
-
-`MIT License`
-
----
 
 ## Notes
 
