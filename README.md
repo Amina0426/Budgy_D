@@ -9,6 +9,30 @@
 
 [Live Demo](https://budgy-q39z.onrender.com)
 
+## Install as an App (PWA)
+
+Budgy can be installed as a Progressive Web App (PWA) on desktop and mobile devices for a more app-like experience.
+
+### On Desktop (Chrome / Edge)
+
+1. Open the live app in your browser
+2. Click the install icon in the address bar
+3. Select **Install Budgy**
+
+### On Android
+
+1. Open the app in Chrome
+2. Tap the three-dot menu
+3. Select **Add to Home Screen** or **Install App**
+
+### On iPhone (Safari)
+
+1. Open the app in Safari
+2. Tap the **Share** button
+3. Select **Add to Home Screen**
+
+Once installed, Budgy can launch like a native application and supports offline access through service worker caching.
+
 ---
 
 ## Overview
