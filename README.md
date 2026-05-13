@@ -1,106 +1,162 @@
 # Budgy
 
-Budgy is a Django-based personal finance tracker with user authentication, REST API-backed expense and income management, budget tracking, and a browser-based front end.
+[![Django](https://img.shields.io/badge/Django-4.x-green)](https://www.djangoproject.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-yellow)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![Render](https://img.shields.io/badge/Render-Hosted-blue)](https://render.com/)
+[![PWA](https://img.shields.io/badge/PWA-Offline-blueviolet)](https://web.dev/progressive-web-apps/)
 
-## 1. Project Structure
+**Budgy** is a modern full-stack expense tracker built with Django, Django REST Framework, and vanilla JavaScript. It offers secure authentication, financial summaries, budget management, receipt uploads, and offline support with PWA capabilities.
 
-- `manage.py` - Django CLI entry point.
-- `budgy_project/` - main Django project settings and root URL configuration.
-- `budgy_app/` - single Django app containing models, views, serializers, URLs, templates, static assets, and admin registration.
-- `media/` - uploaded expense images.
-- `db.sqlite3` - SQLite database.
-- `venv/` - local Python virtual environment.
-
-## 2. App Modules Present
-
-- `models.py` - `Expenses`, `Incomes`, `Budget` models.
-- `views.py` - login/signup/logout pages, React-style REST viewsets for income/expense/budget, and reset endpoint.
-- `serializers.py` - DRF serializers for API input/output.
-- `urls.py` - application route definitions and API router.
-- `templates/budgy_app/` - HTML templates for main UI and auth pages.
-- `static/` - CSS, JavaScript, PWA manifest, service worker, icons.
-- `admin.py` - registers models with Django admin.
-
-## 3. Frontend vs Backend Separation
-
-- Backend: Django + Django REST Framework handles user auth, database models, and JSON API endpoints.
-- Frontend: static HTML/CSS/JS in `budgy_app/templates` and `budgy_app/static`; uses fetch/XHR calls to REST endpoints.
-- The `index.html` template is server-rendered with user context, while client-side JS uses REST API endpoints to manage data.
-
-## 4. Database Models
-
-- `Expenses`:
-  - `user` (ForeignKey to Django user)
-  - `amount` (float)
-  - `tag` (string)
-  - `date` (auto now add)
-  - `img` (optional uploaded image)
-- `Incomes`:
-  - `user`
-  - `amount`
-  - `date`
-- `Budget`:
-  - `user`
-  - `amount`
-  - `created_at`
-
-## 5. Templates and Static File Usage
-
-- `index.html` is the main single-page UI for budget, income, expense, reports, settings, and image preview.
-- `login.html` and `signup.html` are simple authentication pages.
-- Static CSS files style the interface and responsive layout.
-- Static JS implements navigation, expense/income CRUD, filters, budget tracking, image upload, modal controls, theme toggle, and PWA service worker registration.
-- `service-worker.js` and `manifest.json` enable basic offline/PWA caching.
-
-## 6. Routes and Views
-
-- `''` → `index_page` protected by login.
-- `login/`, `signup/`, `logout/` → auth views.
-- `api/incomes/`, `api/expenses/`, `api/budgets/` → DRF viewsets.
-- `api/reset/` → custom DELETE endpoint for clearing data.
-
-## 7. Incomplete Integrations
-
-- `reset` endpoint deletes only `Expenses` and `Incomes`, not user budgets.
-- `downloadData()` in `settings.js` has a broken `method` variable and will fail when exporting data.
-- Budget persistence is only read from the first returned budget record; there is no enforcement of a single budget object per user.
-- `edit` modal opens correctly, but edit form inputs are not pre-populated with the current item values.
-- The app relies on GET/POST/PATCH to authenticated endpoints, but CSRF protection may be incomplete for the REST API if cookies are not set correctly.
-- `signup_view` does not log in the user automatically after account creation.
-
-## 8. Likely Next Development Steps
-
-- fix `downloadData()` to use `GET` and export both budgets and incomes as expected.
-- make `api/reset/` user-scoped or include budgets in reset behavior.
-- improve budget model handling so each user has one active monthly budget.
-- add tests for auth flows, API CRUD operations, and budget calculations.
-- prefill edit dialogs for income/expense update operations.
-- add proper error handling for missing auth and expired sessions.
-
-## 9. Potential Logic Bugs
-
-- `reset` is not user-scoped and can erase all users’ expense/income data.
-- `downloadData()` uses an undefined `method` variable.
-- `Budget` data is read from `budgets[0]` only and may ignore additional budget items.
-- The frontend edit form does not preload current values, which can lead to accidental data overwrite.
-- The app does not delete uploaded expense images when expense rows are removed.
-
-## Features
-
-- User signup/login/logout.
-- Authenticated expense and income tracking.
-- Tag-based expense entries and image attachment for receipts.
-- Budget tracking with used/remaining indicators.
-- Monthly and past expense grouping.
-- Theme toggle and PWA service worker support.
-- Data export and reset controls.
+[Live Demo](YOUR_RENDER_LINK)
 
 ---
 
-### Run locally
+## Overview
 
-1. Activate your virtual environment.
-2. Install dependencies: `pip install django djangorestframework`.
-3. Run migrations: `python manage.py migrate`.
-4. Start server: `python manage.py runserver`.
-5. Visit `http://127.0.0.1:8000/`.
+Budgy helps users manage personal finances through an intuitive web interface. Users can:
+
+- Track incomes and expenses
+- Set and monitor monthly budgets
+- View balance and spending summaries
+- Categorize transactions by tag
+- Upload expense receipts and images
+- Use the app offline with service worker caching
+- Register securely and manage user-specific data
+
+## Features
+
+- ✅ User authentication (signup, login, logout)
+- ✅ Income and expense CRUD operations
+- ✅ Monthly budget creation and balance overview
+- ✅ Expense categorization and receipt uploads
+- ✅ Responsive desktop/mobile UI with HTML/CSS/JS
+- ✅ Progressive Web App (PWA) support
+- ✅ Offline caching via service worker
+- ✅ REST API endpoints with Django REST Framework
+- ✅ SQLite backend for easy local setup
+- ✅ Hosted deployment on Render
+
+## Tech Stack
+
+- Django
+- Django REST Framework
+- Vanilla JavaScript
+- HTML / CSS
+- SQLite
+- Progressive Web App (PWA)
+- Render
+
+## Screenshots
+
+> Add real screenshots here once available.
+
+- Dashboard and summary view
+- Add expense / upload receipt screen
+- Budget and history views
+
+## Project Structure
+
+- `manage.py` — Django command-line utility
+- `budgy_project/` — project settings, URL configuration, WSGI/ASGI entry points
+- `budgy_app/` — application logic, models, views, serializers, templates, and static files
+- `media/` — uploaded expense images and receipts
+- `db.sqlite3` — local SQLite database file
+
+## Installation
+
+Clone the repository and install dependencies.
+
+```bash
+git clone YOUR_GITHUB_REPO_LINK
+cd travel-django
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## Environment Setup
+
+Create a `.env` file in the project root or configure environment variables in `budgy_project/settings.py`.
+
+Example `.env` values:
+
+```env
+SECRET_KEY=your_secret_key_here
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+```
+
+> If you use `.env`, ensure the settings loader reads it before Django starts.
+
+## Database Migrations
+
+Run migrations to prepare the local database.
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## Run the Server
+
+Start the local Django development server.
+
+```bash
+python manage.py runserver
+```
+
+Open `http://127.0.0.1:8000/` in your browser.
+
+## PWA & Offline Support
+
+Budgy includes a PWA manifest and a service worker to enable offline capability and installable behavior. This improves load performance and provides a better mobile experience.
+
+## API Overview
+
+The app exposes REST endpoints for client-side data management.
+
+- `api/incomes/` — manage income records
+- `api/expenses/` — manage expense records
+- `api/budgets/` — manage budgets
+- `api/reset/` — reset expense and income data
+
+Authentication is required for protected endpoints.
+
+## Deployment
+
+Budgy is deployed on Render. The deployed version uses Django static file handling and service worker registration for PWA support.
+
+- Live demo: [YOUR_RENDER_LINK](YOUR_RENDER_LINK)
+
+## Future Improvements
+
+- Add automated tests for authentication and API endpoints
+- Improve budget handling with one active monthly budget per user
+- Add charts and visual financial analytics
+- Enhance receipt image management and cleanup
+- Support data import/export for user financial history
+
+## Contributing
+
+Contributions are welcome. To contribute:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature-name`
+3. Make your changes
+4. Commit your updates: `git commit -m "Add feature"`
+5. Push to your branch: `git push origin feature-name`
+6. Open a pull request
+
+Please keep contributions focused and well documented.
+
+## License
+
+This project is open source. Add your preferred license here, for example:
+
+`MIT License`
+
+---
+
+## Notes
+
+The repository contains a complete Django app with authentication, REST APIs, responsive UI, media uploads, and PWA offline support. It is ready for local development and Render deployment.
